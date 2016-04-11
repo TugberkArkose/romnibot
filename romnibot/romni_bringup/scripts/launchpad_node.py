@@ -149,7 +149,7 @@ class Launchpad_Class(object):
 
 
 
-					self._Left_Encoderb.publish(self._left_encoder_value)
+					self._Left_Encoder.publish(self._left_encoder_value)
 					self._Right_Encoder.publish(self._right_encoder_value)
 
 				
@@ -205,9 +205,10 @@ class Launchpad_Class(object):
 
 
 				
-			except:
+			except Exception as e:
+                                
 				rospy.logwarn("Error in Sensor values")
-				rospy.logwarn(lineParts)
+				rospy.logwarn(e)
 				pass
 			
 

@@ -5,7 +5,7 @@
  <arg name="simulation" default="$(optenv TURTLEBOT_SIMULATION false)"/>
  <param name="/use_sim_time" value="$(arg simulation)"/>
 
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find chefbot_description)/urdf/chefbot_base.xacro'" /> 
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find romni_description)/urdf/chefbot_base.xacro'" /> 
 <!--  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find arlobot_description)/urdf/common.urdf.xacro'" /> -->
 
 
@@ -25,13 +25,13 @@
   <rosparam param="ticks_meter">14865</rosparam>
 
 
-  <node name="launchpad_node" pkg="chefbot_bringup" type="launchpad_node.py">
-    <rosparam file="$(find chefbot_bringup)/param/board_config.yaml" command="load" />
+  <node name="launchpad_node" pkg="romni_bringup" type="launchpad_node.py">
+    <rosparam file="$(find romni_bringup)/param/board_config.yaml" command="load" />
   </node>
 
 
 
-  <node name="lpid_velocity" pkg="chefbot_bringup" type="pid_velocity.py" output="screen">
+  <node name="lpid_velocity" pkg="romni_bringup" type="pid_velocity.py" output="screen">
       <remap from="wheel" to="lwheel"/>
       <remap from="motor_cmd" to="left_wheel_speed"/>
       <remap from="wheel_vtarget" to="lwheel_vtarget"/>
@@ -48,7 +48,7 @@
 
   </node>
 
-  <node name="rpid_velocity" pkg="chefbot_bringup" type="pid_velocity.py" output="screen">
+  <node name="rpid_velocity" pkg="romni_bringup" type="pid_velocity.py" output="screen">
       <remap from="wheel" to="rwheel"/>
       <remap from="motor_cmd" to="right_wheel_speed"/>
       <remap from="wheel_vtarget" to="rwheel_vtarget"/>
@@ -67,8 +67,8 @@
  </node>
 
 
-  <node pkg="chefbot_bringup" type="twist_to_motors.py" name="twist_to_motors" output="screen"/>
-  <node pkg="chefbot_bringup" type="diff_tf.py" name="diff_tf" output="screen"/> 
+  <node pkg="romni_bringup" type="twist_to_motors.py" name="twist_to_motors" output="screen"/>
+  <node pkg="romni_bringup" type="diff_tf.py" name="diff_tf" output="screen"/> 
 
 
 </launch>
