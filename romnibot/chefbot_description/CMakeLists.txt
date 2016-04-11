@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(romni_description)
+project(chefbot_description)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -81,7 +81,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES romni_description
+#  LIBRARIES chefbot_description
 #  CATKIN_DEPENDS urdf xacro
 #  DEPENDS system_lib
 )
@@ -98,19 +98,19 @@ include_directories(
 )
 
 ## Declare a cpp library
-# add_library(romni_description
-#   src/${PROJECT_NAME}/romni_description.cpp
+# add_library(chefbot_description
+#   src/${PROJECT_NAME}/chefbot_description.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(romni_description_node src/romni_description_node.cpp)
+# add_executable(chefbot_description_node src/chefbot_description_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(romni_description_node romni_description_generate_messages_cpp)
+# add_dependencies(chefbot_description_node chefbot_description_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(romni_description_node
+# target_link_libraries(chefbot_description_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -129,7 +129,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS romni_description romni_description_node
+# install(TARGETS chefbot_description chefbot_description_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -154,7 +154,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_romni_description.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_chefbot_description.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
