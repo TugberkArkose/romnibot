@@ -22,7 +22,7 @@
 
 
   <rosparam param="base_width">0.3</rosparam>
-  <rosparam param="ticks_meter">14865</rosparam>
+  <rosparam param="ticks_meter">23500</rosparam>
 
 
   <node name="launchpad_node" pkg="romni_bringup" type="launchpad_node.py">
