@@ -1,18 +1,5 @@
 #!/usr/bin/env python
 
-'''
-
-launchpad_process.py - Recieve sensor values from launchpad node and process for odometry and speed controller
-
-Created September 2014
-
-Copyright(c) 2014 Lentin Joseph
-
-Some portion borrowed from Rainer Hessmer blog
-
-http://www.hessmer.org/blog/
-'''
-
 import rospy
 import sys
 import time

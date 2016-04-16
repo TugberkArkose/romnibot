@@ -64,7 +64,7 @@ class Launchpad_Class(object):
 
 		#Publisher for IMU rotation quaternion values
 		self._qx_ = rospy.Publisher('qx',Float32,queue_size = 10)
-		self._qy_ = rospy.Publisher('qy',Float32,queue_size = 10)
+	    	self._qy_ = rospy.Publisher('qy',Float32,queue_size = 10)
 		self._qz_ = rospy.Publisher('qz',Float32,queue_size = 10)
 		self._qw_ = rospy.Publisher('qw',Float32,queue_size = 10)
 	
@@ -115,8 +115,8 @@ class Launchpad_Class(object):
 
 		rospy.loginfo(left_speed.data)
 
-		#speed_message = 's %d %d\r' %(int(self._left_wheel_speed_),int(self._right_wheel_speed_))
-                speed_message = 's w\r'
+		speed_message = 's %d %d\r' %(int(self._left_wheel_speed_),int(self._right_wheel_speed_))
+                #speed_message = 's w\r'
 		self._WriteSerial(speed_message)
 
 				
@@ -127,8 +127,8 @@ class Launchpad_Class(object):
 
 		rospy.loginfo(right_speed.data)
 
-		#speed_message = 's %d %d\r' %(int(self._left_wheel_speed_),int(self._right_wheel_speed_))
-                speed_message = 's w\r'
+		speed_message = 's %d %d\r' %(int(self._left_wheel_speed_),int(self._right_wheel_speed_))
+                #speed_message = 's w\r'
 		self._WriteSerial(speed_message)
 
 

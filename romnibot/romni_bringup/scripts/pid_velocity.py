@@ -1,23 +1,5 @@
 #!/usr/bin/env python
-"""
-   pid_velocity - takes messages on wheel_vtarget 
-      target velocities for the wheels and monitors wheel for feedback
-      
-    Copyright (C) 2012 Jon Stephan. 
-     
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
 
 import rospy
 import roslib
@@ -59,15 +41,15 @@ class PidVelocity():
         self.Kp = rospy.get_param('~Kp',10)
         self.Ki = rospy.get_param('~Ki',10)
         self.Kd = rospy.get_param('~Kd',0.001)
-        self.out_min = rospy.get_param('~out_min',-255)
-        self.out_max = rospy.get_param('~out_max',255)
+        self.out_min = rospy.get_param('~out_min',-100)
+        self.out_max = rospy.get_param('~out_max',100)
         self.rate = rospy.get_param('~rate',30)
         self.rolling_pts = rospy.get_param('~rolling_pts',2)
         self.timeout_ticks = rospy.get_param('~timeout_ticks',4)
         self.ticks_per_meter = rospy.get_param('ticks_meter', 14860)
         self.vel_threshold = rospy.get_param('~vel_threshold', 0.001)
-        self.encoder_min = rospy.get_param('encoder_min', -2147483648)
-        self.encoder_max = rospy.get_param('encoder_max', 2147483648)
+        self.encoder_min = rospy.get_param('encoder_min', -32760)
+        self.encoder_max = rospy.get_param('encoder_max', 32760)
         self.encoder_low_wrap = rospy.get_param('wheel_low_wrap', (self.encoder_max - self.encoder_min) * 0.3 + self.encoder_min )
         self.encoder_high_wrap = rospy.get_param('wheel_high_wrap', (self.encoder_max - self.encoder_min) * 0.7 + self.encoder_min )
         self.prev_vel = [0.0] * self.rolling_pts
