@@ -286,8 +286,8 @@ void Update_Encoders(){
   Serial.print(Encoder1_Ticks);
   Serial.print("\t");
   Serial.print(Encoder2_Ticks);
-  //Serial.print("\t");
-  //Serial.print(Encoder3_Ticks);
+  Serial.print("\t");
+  Serial.print(Encoder3_Ticks);
   Serial.print("\n");
 }
 
