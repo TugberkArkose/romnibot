@@ -64,7 +64,8 @@ class PidVelocity():
         self.pub_vel = rospy.Publisher('wheel_vel', Float32,queue_size=10)
    
         
-    #####################################################
+        
+        #####################################################
     def spin(self):
     #####################################################
         self.r = rospy.Rate(self.rate) 
@@ -83,7 +84,7 @@ class PidVelocity():
         self.prev_vel = [0.0] * self.rolling_pts
         self.integral = 0.0
         self.error = 0.0
-        self.derivative = 0.0 
+        self.derivative = 0.0
         self.vel = 0.0
         
         # only do the loop if we've recently recieved a target velocity message

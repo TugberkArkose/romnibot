@@ -20,8 +20,9 @@ class TwistToMotors():
     
         self.w = rospy.get_param("~base_width", 0.2)
     
-        self.pub_lmotor = rospy.Publisher('lwheel_vtarget', Float32,queue_size=10)
-        self.pub_rmotor = rospy.Publisher('rwheel_vtarget', Float32,queue_size=10)
+        self.pub_lmotor = rospy.Publisher('lwheel_vtarget', Float32, queue_size = 10)
+        self.pub_rmotor = rospy.Publisher('rwheel_vtarget', Float32, queue_size = 10)
+        self.pub_bmotor = rospy.Publisher('bwheel_vtarget', Float32, queue_size = 10)
         rospy.Subscriber('cmd_vel_mux/input/teleop', Twist, self.twistCallback)
     
     
@@ -56,11 +57,13 @@ class TwistToMotors():
             
         self.right = 1.0 * self.dx + self.dr * self.w / 2 
         self.left = 1.0 * self.dx - self.dr * self.w / 2
+        self.back = 1.0 * self.dr
         # rospy.loginfo("publishing: (%d, %d)", left, right) 
                 
         self.pub_lmotor.publish(self.left)
         self.pub_rmotor.publish(self.right)
-            
+        self.pub_bmotor.publish(self.back)
+        
         self.ticks_since_target += 1
 
     #############################################################
