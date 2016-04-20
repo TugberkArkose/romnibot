@@ -188,6 +188,8 @@ void SetupMotors(){
   pinMode(motor1_dir, OUTPUT);
   pinMode(motor2_pwm, OUTPUT);
   pinMode(motor2_dir, OUTPUT);
+  pinMode(motor3_pwm, OUTPUT);
+  pinMode(motor3_dir, OUTPUT);
 }
 
 
@@ -248,6 +250,7 @@ void Set_Speed()
 {
   motor_left_speed = Messenger_Handler.readLong();
   motor_right_speed = Messenger_Handler.readLong();
+  motor_back_speed = Messenger_Handler.readLong();
 }
 
 void moveNorth(){
@@ -270,12 +273,15 @@ void Reset(){
 void Update_Motors(){
   moveRightMotor(motor_right_speed);
   moveLeftMotor(motor_left_speed);
+  moveBackMotor(motor_back_speed);
 
   Serial.print("s");
   Serial.print("\t");
   Serial.print(motor_left_speed);
   Serial.print("\t");
   Serial.print(motor_right_speed);
+  Serial.print("\t");
+  Serial.print(motor_back_speed);
   Serial.print("\n");
 }
 
@@ -394,4 +400,23 @@ void moveLeftMotor(float leftServoValue)
     digitalWrite(motor2_dir,HIGH);
    }
 
+}
+
+void moveBackMotor(float backServoValue)
+{
+   if (backServoValue > 0)
+  {
+    digitalWrite(motor3_dir,HIGH);
+    analogWrite(motor3_pwm,backServoValue);
+  }
+  else if(backServoValue < 0)
+  {
+    digitalWrite(motor3_dir,LOW);
+    analogWrite(motor3_pwm,abs(backServoValue));
+
+  }
+  else if(backServoValue == 0)
+  {
+    digitalWrite(motor3_dir,HIGH);
+   }
 }

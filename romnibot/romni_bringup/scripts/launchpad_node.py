@@ -16,7 +16,7 @@ from sensor_msgs.msg import Imu
 
 #Class to handle serial data from Launchpad and converted to ROS topics
 class Launchpad_Class(object):
-	
+
 	def __init__(self):
 		print "Initializing Launchpad Class"
 
@@ -28,7 +28,7 @@ class Launchpad_Class(object):
                 self._back_encoder_value = 0
 
 		self._battery_value = 0
-                
+
 		self._north_ultrasonic_value = 0
                 self._north_east_ultrasonic_value = 0
                 self._north_west_ultrasonic_value = 0
@@ -56,12 +56,12 @@ class Launchpad_Class(object):
 		#Initializing SerialDataGateway with port, baudrate and callback function to handle serial data
 		self._SerialDataGateway = SerialDataGateway(port, baudRate,  self._HandleReceivedLine)
 		rospy.loginfo("Started serial communication")
-		
+
 
 #Subscribers and Publishers
 
 		#Publisher for left and right wheel encoder values
-		self._Left_Encoder = rospy.Publisher('lwheel',Int64,queue_size = 10)		
+		self._Left_Encoder = rospy.Publisher('lwheel',Int64,queue_size = 10)
 		self._Right_Encoder = rospy.Publisher('rwheel',Int64,queue_size = 10)
                 self._Back_Encoder = rospy.Publisher('bwheel',Int64,queue_size = 10)
 
@@ -80,7 +80,7 @@ class Launchpad_Class(object):
 	    	self._qy_ = rospy.Publisher('qy',Float32,queue_size = 10)
 		self._qz_ = rospy.Publisher('qz',Float32,queue_size = 10)
 		self._qw_ = rospy.Publisher('qw',Float32,queue_size = 10)
-	
+
 		#Publisher for entire serial data
 		self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10)
 
@@ -96,7 +96,7 @@ class Launchpad_Class(object):
         	self.imu_data.orientation_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e-6]
 	        self.imu_data.angular_velocity_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e-6]
         	self.imu_data.linear_acceleration_covariance = [-1,0,0,0,0,0,0,0,0]
-        	self.gyro_measurement_range = 150.0 
+        	self.gyro_measurement_range = 150.0
         	self.gyro_scale_correction = 1.35
         	self.imu_pub = rospy.Publisher('imu/data', Imu,queue_size = 10)
 
@@ -104,7 +104,7 @@ class Launchpad_Class(object):
 		self.lastUpdate = 0
 
                 #New addon for computing quaternion
-		
+
 		self.pi = 3.14159
 		self.GyroMeasError = float(self.pi * ( 40 / 180 ))
 		self.beta = float(math.sqrt(3 / 4) * self.GyroMeasError)
@@ -132,7 +132,7 @@ class Launchpad_Class(object):
                 #speed_message = 's w\r'
 		self._WriteSerial(speed_message)
 
-				
+
 
 	def _Update_Right_Speed(self, right_speed):
 
@@ -175,7 +175,7 @@ class Launchpad_Class(object):
 					self._Left_Encoder.publish(self._left_encoder_value)
 					self._Right_Encoder.publish(self._right_encoder_value)
                                         self._Back_Encoder.publish(self._back_encoder_value)
-				
+
 				if(lineParts[0] == 'b'):
 					self._battery_value = float(lineParts[1])
 					self._Battery_Level.publish(self._battery_value)
@@ -194,7 +194,7 @@ class Launchpad_Class(object):
                                         # self._US_East_Value.publish(self._east_ultrasonic_value)
                                         # self._US_West_Value.publish(self._west_ultrasonic_value)
                                         # self._US_South_Value.publish(self._south_ultrasonic_value)
-                                        
+
 				if(lineParts[0] == 'i'):
 
 					self._qx = float(lineParts[1])
@@ -215,7 +215,7 @@ class Launchpad_Class(object):
 
 					imu_msg.header = h
 
-					imu_msg.orientation_covariance = (-1., )*9	
+					imu_msg.orientation_covariance = (-1., )*9
 					imu_msg.angular_velocity_covariance = (-1., )*9
 					imu_msg.linear_acceleration_covariance = (-1., )*9
 
@@ -229,11 +229,11 @@ class Launchpad_Class(object):
 
 
 			except Exception as e:
-                                
+
 				rospy.logwarn("Error in Sensor values")
 				rospy.logwarn(e)
 				pass
-			
+
 
 
 
@@ -250,7 +250,7 @@ class Launchpad_Class(object):
 	def Stop(self):
 		rospy.logdebug("Stopping")
 		self._SerialDataGateway.Stop()
-		
+
 
 	def Subscribe_Speed(self):
 		a = 1
@@ -274,8 +274,8 @@ if __name__ =='__main__':
 	rospy.init_node('launchpad_ros',anonymous=True)
 	launchpad = Launchpad_Class()
 	try:
-		
-		launchpad.Start()	
+
+		launchpad.Start()
 		rospy.spin()
 	except rospy.ROSInterruptException:
 		rospy.logwarn("Error in main function")
