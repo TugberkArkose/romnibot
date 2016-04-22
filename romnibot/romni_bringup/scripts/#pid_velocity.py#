@@ -68,7 +68,10 @@ class PidVelocity():
         #####################################################
     def spin(self):
     #####################################################
-        self.r = rospy.Rate(self.rate)
+Kd',0.001)
+        self.out_min = rospy.get_param('~out_min',-100)
+        self.out_max = rospy.get_param('~out_max',100)
+        self.rate = rospy.get_param('~r        self.r = rospy.Rate(self.rate)
         self.then = rospy.Time.now()
         self.ticks_since_target = self.timeout_ticks
         self.wheel_prev = self.wheel_latest

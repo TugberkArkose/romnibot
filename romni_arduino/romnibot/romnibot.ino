@@ -88,9 +88,9 @@ float SecondsSinceLastUpdate = 0;
 
 //Motor speed from PC
 //Motor left and right speed
-float motor_left_speed = 0;
-float motor_right_speed = 0;
-float motor_back_speed = 0;
+volatile float motor_left_speed = 0;
+volatile float motor_right_speed = 0;
+volatile float motor_back_speed = 0;
 
 RomniMotor motor1(motor1_pwm, motor1_dir, CURRENTA);
 RomniMotor motor2(motor2_pwm, motor2_dir, CURRENTB);
@@ -164,8 +164,8 @@ void SetupEncoders(){
 
   pinMode(encoder3A, INPUT_PULLUP);      // sets pin A as input
   pinMode(encoder3B, INPUT_PULLUP);      // sets pin B as input
-  attachInterrupt(4, encoder3A_CHANGE, CHANGE);
-  attachInterrupt(5, encoder3B_CHANGE, CHANGE);
+  attachInterrupt(5, encoder3A_CHANGE, CHANGE);
+  attachInterrupt(4, encoder3B_CHANGE, CHANGE);
 
   // Quadrature encoders
   // Left encoder
@@ -212,7 +212,7 @@ void loop(){
     Read_From_Serial(); //Read from Serial port
     Update_Time();  //Send time information through serial port
     Update_Encoders();    //Send encoders values through serial port
-    Update_Ultra_Sonic();      //Send ultrasonic values through serial port
+    //Update_Ultra_Sonic();      //Send ultrasonic values through serial port
     Update_Motors();  //Update motor values with corresponding speed and send speed values through serial port
     Update_Battery();   //Send battery values through serial port
 }
@@ -240,7 +240,7 @@ void OnMssageCompleted(){
   if(Messenger_Handler.checkString(set_speed)){
      //This will set the speed
     Set_Speed();
-     return;
+    return;
   }
 }
 
@@ -251,14 +251,6 @@ void Set_Speed()
   motor_left_speed = Messenger_Handler.readLong();
   motor_right_speed = Messenger_Handler.readLong();
   motor_back_speed = Messenger_Handler.readLong();
-}
-
-void moveNorth(){
-    motor1.setMotorDirection(1);
-    motor1.setSpeed(30);
-    motor2.setMotorDirection(1);
-    motor2.setSpeed(30);
-    motor3.setSpeed(0);
 }
 
 //Reset function
@@ -275,14 +267,14 @@ void Update_Motors(){
   moveLeftMotor(motor_left_speed);
   moveBackMotor(motor_back_speed);
 
-  Serial.print("s");
+  /*Serial.print("s");
   Serial.print("\t");
   Serial.print(motor_left_speed);
   Serial.print("\t");
   Serial.print(motor_right_speed);
   Serial.print("\t");
   Serial.print(motor_back_speed);
-  Serial.print("\n");
+  Serial.print("\n");*/
 }
 
 //Will update both encoder value through serial port
@@ -313,10 +305,10 @@ void Update_Ultra_Sonic(){
   cm = microsecondsToCentimeters(duration);
 
   //Sending through serial port
-  Serial.print("u");
+  /*Serial.print("u");
   Serial.print("\t");
   Serial.print(cm);
-  Serial.print("\n");
+  Serial.print("\n");*/
 }
 
 
@@ -331,12 +323,12 @@ void Update_Time(){
   LastUpdateMicrosecs = CurrentMicrosecs;
   SecondsSinceLastUpdate = MicrosecsSinceLastUpdate / 1000000.0;
 
-  Serial.print("t");
+  /*Serial.print("t");
   Serial.print("\t");
   Serial.print(LastUpdateMicrosecs);
   Serial.print("\t");
   Serial.print(SecondsSinceLastUpdate);
-  Serial.print("\n");
+  Serial.print("\n");*/
 }
 
 //Conversion of microsecond to centimeter
@@ -359,64 +351,39 @@ void Update_Battery(){
 }
 
 //Motor running function
-void moveRightMotor(float rightServoValue)
+void moveRightMotor(float rightWheelSpeed)
 {
-  if (rightServoValue>0)
-  {
-
-    digitalWrite(motor1_dir,HIGH);
-    analogWrite(motor1_pwm,rightServoValue);
-
+  if (rightWheelSpeed > 0 || rightWheelSpeed == 0)  {
+    motor1.setMotorDirection(1);
+    motor1.setSpeed(rightWheelSpeed);
   }
-  else if(rightServoValue<0)
-  {
-    digitalWrite(motor1_dir,LOW);
-    analogWrite(motor1_pwm,abs(rightServoValue));
-
-  }
-
-  else if(rightServoValue == 0)
-  {
-    digitalWrite(motor1_dir,HIGH);
+  else {
+    motor1.setMotorDirection(0);
+    motor1.setSpeed(abs(rightWheelSpeed));
   }
 }
 
 
-void moveLeftMotor(float leftServoValue)
+void moveLeftMotor(float leftWheelSpeed)
 {
- if (leftServoValue > 0)
-  {
-    digitalWrite(motor2_dir,HIGH);
-    analogWrite(motor2_pwm,leftServoValue);
+ if (leftWheelSpeed > 0 || leftWheelSpeed == 0)  {
+    motor2.setMotorDirection(1);
+    motor2.setSpeed(leftWheelSpeed);
   }
-  else if(leftServoValue < 0)
-  {
-    digitalWrite(motor2_dir,LOW);
-    analogWrite(motor2_pwm,abs(leftServoValue));
-
+  else {
+    motor2.setMotorDirection(0);
+    motor2.setSpeed(abs(leftWheelSpeed));
   }
-  else if(leftServoValue == 0)
-  {
-    digitalWrite(motor2_dir,HIGH);
-   }
-
 }
 
-void moveBackMotor(float backServoValue)
+void moveBackMotor(float backWheelSpeed)
 {
-   if (backServoValue > 0)
-  {
-    digitalWrite(motor3_dir,HIGH);
-    analogWrite(motor3_pwm,backServoValue);
+  if (backWheelSpeed > 0 || backWheelSpeed == 0)  {
+    motor3.setMotorDirection(1);
+    motor3.setSpeed(backWheelSpeed);
   }
-  else if(backServoValue < 0)
-  {
-    digitalWrite(motor3_dir,LOW);
-    analogWrite(motor3_pwm,abs(backServoValue));
-
+  else {
+    motor3.setMotorDirection(0);
+    motor3.setSpeed(abs(backWheelSpeed));
   }
-  else if(backServoValue == 0)
-  {
-    digitalWrite(motor3_dir,HIGH);
-   }
 }
