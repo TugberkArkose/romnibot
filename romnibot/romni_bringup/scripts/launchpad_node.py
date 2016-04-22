@@ -43,7 +43,7 @@ class Launchpad_Class(object):
 
 		self._left_wheel_speed_ = 0
 		self._right_wheel_speed_ = 0
-                self._back_wheel_speed = 0
+                self._back_wheel_speed_ = 0
 
 		self._LastUpdate_Microsec = 0
 		self._Second_Since_Last_Update = 0
