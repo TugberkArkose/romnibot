@@ -56,7 +56,7 @@ class TwistToMotors():
         # dr = (r - l) / w
 
         self.right = 1.0 * self.dx + self.dr * self.w / 2
-        self.left = 1.0 * self.dx - self.dr * self.w / 2
+        self.left = 1.0 * self.dx - self.dr * self.w /2
         if self.dx == 0:
             self.back = 1.0 * self.dx - self.dr * self.w / 2
         else:
