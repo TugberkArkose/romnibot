@@ -1,0 +1,9 @@
+<launch>
+
+  <!--- Run gmapping -->
+  <include file="$(find romni_bringup)/launch/gmapping_demo.launch" />
+
+  <!-- Run Frontier Exploration -->
+  <include file="$(find romni_bringup)/launch/exploration.launch" />
+
+</launch>
