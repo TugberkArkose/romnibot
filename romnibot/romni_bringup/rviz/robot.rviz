@@ -436,6 +436,9 @@ Visualization Manager:
       Topic: /initialpose
     - Class: rviz/SetGoal
       Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
   Value: true
   Views:
     Current:
