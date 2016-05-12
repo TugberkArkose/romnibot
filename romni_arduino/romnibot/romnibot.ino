@@ -47,6 +47,16 @@ volatile long Encoder1_Ticks = 0;
 volatile long Encoder2_Ticks = 0;
 volatile long Encoder3_Ticks = 0;
 
+const int pingPin1 = 4;
+const int pingPin2 = 5;
+const int pingPin3 = 6;
+
+unsigned int duration, inches;
+unsigned long previousMillis1 = 0;
+unsigned long previousMillis2 = 0;
+unsigned long previousMillis3 = 0;
+const long SENSOR_DELAY = 200;
+
 /*const int Left_Encoder_PinA = 2;
 const int Left_Encoder_PinB = 3;
 
@@ -69,8 +79,8 @@ volatile bool RightEncoderBSet;*/
 #define motor3_pwm 10
 
 //Ultrasonic pins definition
-const int echo = 9, Trig = 10;
-long duration, cm;
+//const int echo = 9, Trig = 10;
+//long duration, cm;
 
 //Battery level monitor for future upgrade
 #define BATTERY_SENSE_PIN 33
@@ -105,7 +115,7 @@ void setup(){
   Serial.begin(115200);
   SetupEncoders();
   SetupMotors();
-  SetupUltrasonic();
+  //SetupUltrasonic();
   SetupReset();
   Messenger_Handler.attach(OnMssageCompleted);
 }
@@ -194,10 +204,10 @@ void SetupMotors(){
 
 
 //Setup UltrasonicsSensor() function
-void SetupUltrasonic(){
+/*void SetupUltrasonic(){
  pinMode(Trig, OUTPUT);
  pinMode(echo, INPUT);
-}
+}*/
 
 //Setup Reset() function
 
@@ -209,10 +219,15 @@ void SetupReset(){
 
 //MAIN LOOP
 void loop(){
+    //unsigned long currentMillis = millis();
     Read_From_Serial(); //Read from Serial port
     Update_Time();  //Send time information through serial port
     Update_Encoders();    //Send encoders values through serial port
     //Update_Ultra_Sonic();      //Send ultrasonic values through serial port
+    
+    /*if(currentMillis - previousMillis1 >= SENSOR_DELAY){
+      Update_Ultra_Sonic();
+    }  */
     Update_Motors();  //Update motor values with corresponding speed and send speed values through serial port
     Update_Battery();   //Send battery values through serial port
 }
@@ -292,23 +307,43 @@ void Update_Encoders(){
 
 //Will update ultrasonic sensors through serial port
 void Update_Ultra_Sonic(){
-  digitalWrite(Trig, LOW);
-  delayMicroseconds(2);
-  digitalWrite(Trig, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(Trig, LOW);
-  // The echo pin is used to read the signal from the PING))): a HIGH
-  // pulse whose duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
-  duration = pulseIn(echo, HIGH);
-  // convert the time into a distance
-  cm = microsecondsToCentimeters(duration);
-
-  //Sending through serial port
-  /*Serial.print("u");
-  Serial.print("\t");
-  Serial.print(cm);
-  Serial.print("\n");*/
+    pinMode(pingPin1, OUTPUT);       // Set pin to OUTPUT         
+    digitalWrite(pingPin1, LOW);        // Ensure pin is low
+    delayMicroseconds(2);
+    digitalWrite(pingPin1, HIGH);       // Start ranging
+    delayMicroseconds(5);              //   with 5 microsecond burst
+    digitalWrite(pingPin1, LOW);        // End ranging
+    pinMode(pingPin1, INPUT);           // Set pin to INPUT
+    duration = pulseIn(pingPin1, HIGH,20000); // Read echo pulse
+    inches = duration / 74 / 2;
+    
+    Serial.print(inches);
+    
+    pinMode(pingPin2, OUTPUT);       // Set pin to OUTPUT         
+    digitalWrite(pingPin2, LOW);        // Ensure pin is low
+    delayMicroseconds(2);
+    digitalWrite(pingPin2, HIGH);       // Start ranging
+    delayMicroseconds(5);              //   with 5 microsecond burst
+    digitalWrite(pingPin2, LOW);        // End ranging
+    pinMode(pingPin2, INPUT);           // Set pin to INPUT
+    duration = pulseIn(pingPin2, HIGH,20000); // Read echo pulse
+    inches = duration / 74 / 2;
+    
+    Serial.print("    ");
+    Serial.print(inches);
+    
+    pinMode(pingPin3, OUTPUT);       // Set pin to OUTPUT         
+    digitalWrite(pingPin3, LOW);        // Ensure pin is low
+    delayMicroseconds(2);
+    digitalWrite(pingPin3, HIGH);       // Start ranging
+    delayMicroseconds(5);              //   with 5 microsecond burst
+    digitalWrite(pingPin3, LOW);        // End ranging
+    pinMode(pingPin3, INPUT);           // Set pin to INPUT
+    duration = pulseIn(pingPin3, HIGH,20000); // Read echo pulse
+    inches = duration / 74 / 2;
+    
+    Serial.print("    ");
+    Serial.println(inches);
 }
 
 

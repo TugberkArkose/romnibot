@@ -5,7 +5,7 @@ project(chefbot_gazebo)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  chefbot_bringup
+  romni_bringup
   chefbot_description
   depthimage_to_laserscan
   diagnostic_aggregator
@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   robot_state_publisher
   xacro
   yocs_cmd_vel_mux
-  
+
 )
 
 ## System dependencies are found with CMake's conventions
