@@ -1,12 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'robot.ui'
-#
-# Created: Sat Feb 21 20:25:38 2015
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
 
 
 import rospy
@@ -134,7 +126,7 @@ class Ui_Form(object):
 	print "Waiting for server"
 #	self.client.wait_for_server()
 
-	
+
 	self.goal.target_pose.pose.position.x=float(self.current_table_position[0])
 	self.goal.target_pose.pose.position.y=float(self.current_table_position[1])
 	self.goal.target_pose.pose.position.z=float(self.current_table_position[2])
@@ -146,7 +138,7 @@ class Ui_Form(object):
 	self.goal.target_pose.header.frame_id= 'map'
 	self.goal.target_pose.header.stamp = rospy.Time.now()
 
-	
+
 #	print temp_table_pose[0]
 #	print temp_table_pose[1]
 
@@ -179,11 +171,11 @@ class Ui_Form(object):
 
         self.progressBar.setProperty("value", battery_value)
         self.label_4.setText(_fromUtf8(robot_status))
- 
+
 
 
     def update_values(self):
-  	self.thread =  WorkThread() 
+  	self.thread =  WorkThread()
   	QtCore.QObject.connect( self.thread,  QtCore.SIGNAL("update(QString)"), self.add )
   	self.thread.start()
 
@@ -206,17 +198,17 @@ class Ui_Form(object):
 class WorkThread(QtCore.QThread):
 	def __init__(self):
 		QtCore.QThread.__init__(self)
- 
+
 	def __del__(self):
 		self.wait()
- 
+
 	def run(self):
 		while True:
 			time.sleep(0.3) # artificial time delay
-			self.emit( QtCore.SIGNAL('update(QString)'), " " ) 
+			self.emit( QtCore.SIGNAL('update(QString)'), " " )
 #			print "Hello"
-	
-   
+
+
   		return
 
 if __name__ == "__main__":
@@ -235,4 +227,3 @@ if __name__ == "__main__":
 	ui.setupUi(Form)
 	Form.show()
 	sys.exit(app.exec_())
-

@@ -1,6 +1,4 @@
 <launch>
-  <!-- https://github.com/ros-planning/navigation/issues/206 -->
-  <include file="$(find romni_bringup)/launch/3dsensor.launch">
     <arg name="rgb_processing" value="false" />
     <arg name="depth_registration" value="false" />
     <arg name="depth_processing" value="false" />

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import rospy
-#import roslib
-#roslib.load_manifest('differential_drive')
 from math import sin, cos, pi
 
 from geometry_msgs.msg import Quaternion
@@ -10,13 +8,9 @@ from nav_msgs.msg import Odometry
 from tf.broadcaster import TransformBroadcaster
 from std_msgs.msg import Int16, Int64
 
-#############################################################################
 class DiffTf:
-#############################################################################
 
-    #############################################################################
     def __init__(self):
-    #############################################################################
         rospy.init_node("diff_tf")
         self.nodename = rospy.get_name()
         rospy.loginfo("-I- %s started" % self.nodename)
@@ -68,18 +62,14 @@ class DiffTf:
         self.odomPub = rospy.Publisher("odom", Odometry,queue_size=10)
         self.odomBroadcaster = TransformBroadcaster()
 
-    #############################################################################
     def spin(self):
-    #############################################################################
         r = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
             self.update()
             r.sleep()
 
 
-    #############################################################################
     def update(self):
-    #############################################################################
         now = rospy.Time.now()
         if now > self.t_next:
             elapsed = now - self.then
@@ -149,9 +139,7 @@ class DiffTf:
 
 
 
-    #############################################################################
     def lwheelCallback(self, msg):
-    #############################################################################
         enc = msg.data
         if (enc < self.encoder_low_wrap and self.prev_lencoder > self.encoder_high_wrap):
             self.lmult = self.lmult + 1
@@ -164,9 +152,7 @@ class DiffTf:
 
         self.prev_lencoder = enc
 
-    #############################################################################
     def rwheelCallback(self, msg):
-    #############################################################################
         enc = msg.data
         if(enc < self.encoder_low_wrap and self.prev_rencoder > self.encoder_high_wrap):
             self.rmult = self.rmult + 1
@@ -178,9 +164,8 @@ class DiffTf:
 
 
         self.prev_rencoder = enc
-    #############################################################################
+
     def bwheelCallback(self, msg):
-    #############################################################################
         enc = msg.data
         if (enc < self.encoder_low_wrap and self.prev_bencoder > self.encoder_high_wrap):
             self.bmult = self.bmult + 1
@@ -191,8 +176,7 @@ class DiffTf:
         self.back = 1.0 * (enc + self.bmult * (self.encoder_max - self.encoder_min))
 
         self.prev_bencoder = enc
-#############################################################################
-#############################################################################
+        
 if __name__ == '__main__':
     """ main """
     diffTf = DiffTf()

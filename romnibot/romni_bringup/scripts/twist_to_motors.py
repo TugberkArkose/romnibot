@@ -5,15 +5,9 @@ import roslib
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist
 
-#############################################################
-#############################################################
 class TwistToMotors():
-#############################################################
-#############################################################
 
-    #############################################################
     def __init__(self):
-    #############################################################
         rospy.init_node("twist_to_motors")
         nodename = rospy.get_name()
         rospy.loginfo("%s started" % nodename)
@@ -31,9 +25,7 @@ class TwistToMotors():
         self.left = 0
         self.right = 0
 
-    #############################################################
     def spin(self):
-    #############################################################
 
         r = rospy.Rate(self.rate)
         idle = rospy.Rate(10)
@@ -48,9 +40,7 @@ class TwistToMotors():
                 r.sleep()
             idle.sleep()
 
-    #############################################################
     def spinOnce(self):
-    #############################################################
 
         # dx = (l + r) / 2
         # dr = (r - l) / w
@@ -69,17 +59,13 @@ class TwistToMotors():
 
         self.ticks_since_target += 1
 
-    #############################################################
     def twistCallback(self,msg):
-    #############################################################
         # rospy.loginfo("-D- twistCallback: %s" % str(msg))
         self.ticks_since_target = 0
         self.dx = msg.linear.x
         self.dr = msg.angular.z
         self.dy = msg.linear.y
 
-#############################################################
-#############################################################
 if __name__ == '__main__':
     """ main """
     twistToMotors = TwistToMotors()
