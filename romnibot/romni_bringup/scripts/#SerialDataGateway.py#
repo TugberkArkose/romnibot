@@ -21,7 +21,7 @@ class SerialDataGateway(object):
 
 	def __init__(self, port="/dev/ttyUSB0", baudrate=115200, lineHandler = _OnLineReceived):
 		'''
-		Initializes the receiver class.
+		Initializes the receiver class. 
 		port: The serial port to listen to.
 		receivedLineHandler: The function to call when a line was received.
 		'''
@@ -49,9 +49,9 @@ class SerialDataGateway(object):
 		while self._KeepRunning:
 			data = self._Serial.read()
 			if data == '\r':
-				pass
-			if data == '\n':
-				self.ReceivedLineHandler(stringIO.getvalue())
+			pass
+		if data == '\n':
+			self.ReceivedLineHandler(stringIO.getvalue())
 				stringIO.close()
 				stringIO = StringIO()
 			else:
