@@ -126,36 +126,43 @@ void setup(){
   Messenger_Handler.attach(OnMssageCompleted);
 }
 
+// Attach interrupt to motor1's encoder A output
 void encoder1A_CHANGE() {
   encoder1.readEncoderA();
   Encoder1_Ticks = encoder1.getPulses();
 }
 
+// Attach interrupt to motor1's encoder B output
 void encoder1B_CHANGE() {
   encoder1.readEncoderB();
   Encoder1_Ticks = encoder1.getPulses();
 }
 
+// Attach interrupt to motor2's encoder A output
 void encoder2A_CHANGE() {
   encoder2.readEncoderA();
   Encoder2_Ticks = encoder2.getPulses();
 }
 
+// Attach interrupt to motor2's encoder B output
 void encoder2B_CHANGE() {
   encoder2.readEncoderB();
   Encoder2_Ticks = encoder2.getPulses();
 }
 
+// Attach interrupt to motor3's encoder A output
 void encoder3A_CHANGE() {
   encoder3.readEncoderA();
   Encoder3_Ticks = encoder3.getPulses();
 }
 
+// Attach interrupt to motor3's encoder B output
 void encoder3B_CHANGE() {
   encoder3.readEncoderB();
   Encoder3_Ticks = encoder3.getPulses();
 }
 
+// Setup Encoders' pins
 void SetupEncoders(){
   // Quadrature encoders
   pinMode(encoder1A, INPUT_PULLUP);      // sets pin A as input
@@ -174,7 +181,7 @@ void SetupEncoders(){
   attachInterrupt(4, encoder3B_CHANGE, CHANGE);
 }
 
-//Setup Motors() function
+//Setup Motors' pins
 void SetupMotors(){
   pinMode(motor1_pwm, OUTPUT);
   pinMode(motor1_dir, OUTPUT);
@@ -184,7 +191,7 @@ void SetupMotors(){
   pinMode(motor3_dir, OUTPUT);
 }
 
-//MAIN LOOP
+// MAIN LOOP
 void loop(){
     //moveCheck = true;
     unsigned long currentMillis = millis();
@@ -207,7 +214,7 @@ void loop(){
 }
 
 
-//Read from Serial Function
+// Read from Serial Function
 void Read_From_Serial(){
    while(Serial.available() > 0){
        int data = Serial.read();
@@ -216,7 +223,7 @@ void Read_From_Serial(){
 }
 
 
-//OnMssg Complete function definition
+// OnMssg Complete function definition
 void OnMssageCompleted(){
   char set_speed[] = "s";
   
@@ -227,14 +234,14 @@ void OnMssageCompleted(){
   }
 }
 
-//Set speed
+// Set speed
 void Set_Speed(){
   motor_left_speed = Messenger_Handler.readLong();
   motor_right_speed = Messenger_Handler.readLong();
   motor_back_speed = Messenger_Handler.readLong();
 }
 
-//Will update both motors
+// Will update all three motors
 void Update_Motors(){ 
   if(motor_right_speed > 0 && motor_left_speed > 0){
     if(!isNorthLocked && !isNorthWestLocked && !isNorthEastLocked){
@@ -267,7 +274,7 @@ void Update_Motors(){
      
 }
 
-//Will update both encoder value through serial port
+// Will write all three encoder value through serial port
 void Update_Encoders(){
   Serial.print("e");
   Serial.print("\t");
@@ -280,7 +287,7 @@ void Update_Encoders(){
 }
 
 
-//Will update ultrasonic sensors through serial port
+// Will read ultrasonic sensors and detects obstacles for all 6 directions.
 void Update_Ultra_Sonic(){
     int inch;
     // North West ultrasonic
@@ -326,6 +333,7 @@ void Update_Ultra_Sonic(){
       lockOrUnlockDirection(&isSouthWestLocked, false);
 }
 
+// Read Ultrasonic sensors
 int Read_Ultrasonic(int ultrasonicPin){
   pinMode(ultrasonicPin, OUTPUT);       // Set pin to OUTPUT         
   digitalWrite(ultrasonicPin, LOW);        // Ensure pin is low
@@ -339,6 +347,7 @@ int Read_Ultrasonic(int ultrasonicPin){
   return inches;
 }
 
+// Will read infrared sensors and detects stairs for all 3 directions.
 void Update_Infrared(){
   int distance;
   distance = readInfrared(IR_Pin1);
@@ -365,6 +374,7 @@ void Update_Infrared(){
       lockOrUnlockDirection(&isSouthWestLocked, false);
 } 
 
+// Read Infrared sensors
 int readInfrared(int pin){
   int val = analogRead(pin);
   int distance = map(val, 0, 550, 150, 20);
@@ -391,7 +401,7 @@ long microsecondsToCentimeters(long microseconds){
 return microseconds / 29 / 2;
 }
 
-//Update battery function
+// Update battery function
 void Update_Battery(){
  /*battery_level = analogRead(PC_4);
 
@@ -402,19 +412,7 @@ void Update_Battery(){
 */
 }
 
-//Motor running function
-void moveRightMotor(float rightWheelSpeed){
-  if (rightWheelSpeed > 0 || rightWheelSpeed == 0)  {
-    motor1.setMotorDirection(1);
-    motor1.setSpeed(rightWheelSpeed);
-  }
-  else {
-    motor1.setMotorDirection(0);
-    motor1.setSpeed(abs(rightWheelSpeed));
-  }
-}
-
-
+// Motor1 running function
 void moveLeftMotor(float leftWheelSpeed){  
   if (leftWheelSpeed > 0 || leftWheelSpeed == 0)  {
     motor2.setMotorDirection(1);
@@ -426,6 +424,19 @@ void moveLeftMotor(float leftWheelSpeed){
   }
 }
 
+// Motor2 running function
+void moveRightMotor(float rightWheelSpeed){
+  if (rightWheelSpeed > 0 || rightWheelSpeed == 0)  {
+    motor1.setMotorDirection(1);
+    motor1.setSpeed(rightWheelSpeed);
+  }
+  else {
+    motor1.setMotorDirection(0);
+    motor1.setSpeed(abs(rightWheelSpeed));
+  }
+}
+
+// Motor3 running function
 void moveBackMotor(float backWheelSpeed){
   if (backWheelSpeed > 0 || backWheelSpeed == 0)  {
     motor3.setMotorDirection(1);
@@ -437,6 +448,7 @@ void moveBackMotor(float backWheelSpeed){
   }
 }
 
+// Function to stop all three motors
 void stopMotors(){
  motor1.setMotorDirection(!motor1.getMotorDirection());
  motor1.setSpeed(255);
@@ -452,6 +464,7 @@ void stopMotors(){
  moveBackMotor(0); */
 }
 
+// Function to set obstacle or stairs in the given direction
 void lockOrUnlockDirection(boolean *dir, boolean condition){
   if(condition){
     stopMotors();
