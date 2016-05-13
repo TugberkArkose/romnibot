@@ -197,7 +197,7 @@ void loop(){
     unsigned long currentMillis = millis();
     Read_From_Serial(); //Read from Serial port
     Update_Time();  // Update time
-    //Update_Encoders();    //Send encoders values through serial port
+    Update_Encoders();    //Send encoders values through serial port
     
     if(currentMillis - previousMillis1 >= SENSOR_DELAY){
       Update_Ultra_Sonic();  // Read input from ultrasonic sensors
@@ -350,24 +350,20 @@ int Read_Ultrasonic(int ultrasonicPin){
 // Will read infrared sensors and detects stairs for all 3 directions.
 void Update_Infrared(){
   int distance;
-  distance = readInfrared(IR_Pin1);
-  Serial.print(distance);
+  
+  distance = readInfrared(IR_Pin1)
   if(distance > 75)  
       lockOrUnlockDirection(&isNorthLocked, true);      
     else
       lockOrUnlockDirection(&isNorthLocked, false);
       
   distance = readInfrared(IR_Pin2);
-  Serial.print("   ");
-  Serial.print(distance);
   if(distance > 75)  
       lockOrUnlockDirection(&isSouthEastLocked, true);      
     else
       lockOrUnlockDirection(&isSouthEastLocked, false);
   
   distance = readInfrared(IR_Pin3);
-  Serial.print("   ");
-  Serial.println(distance);
   if(distance > 75)  
       lockOrUnlockDirection(&isSouthWestLocked, true);      
     else
