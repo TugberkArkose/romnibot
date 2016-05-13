@@ -92,22 +92,22 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        chefbot_caster_back_link:
+        romnibot_caster_back_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        chefbot_caster_front_link:
+        romnibot_caster_front_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        chefbot_wheel_left_link:
+        romnibot_wheel_left_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        chefbot_wheel_right_link:
+        romnibot_wheel_right_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false

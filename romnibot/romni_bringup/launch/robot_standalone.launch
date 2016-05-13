@@ -2,7 +2,7 @@
 
 
 
- <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find chefbot_description)/urdf/chefbot_base.xacro'" />
+ <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find romnibot_description)/urdf/romnibot_base.xacro'" />
 <!--  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find arlobot_description)/urdf/common.urdf.xacro'" /> -->
 
 

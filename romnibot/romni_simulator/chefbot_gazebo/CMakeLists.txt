@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(chefbot_gazebo)
+project(romnibot_gazebo)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   romni_bringup
-  chefbot_description
+  romnibot_description
   depthimage_to_laserscan
   diagnostic_aggregator
   gazebo_ros
@@ -89,8 +89,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES chefbot_gazebo
-#  CATKIN_DEPENDS chefbot_bringup chefbot_description depthimage_to_laserscan diagnostic_aggregator gazebo_ros kobuki_gazebo_plugins robot_pose_ekf robot_state_publisher xacro yocs_cmd_vel_mux
+#  LIBRARIES romnibot_gazebo
+#  CATKIN_DEPENDS romnibot_bringup romnibot_description depthimage_to_laserscan diagnostic_aggregator gazebo_ros kobuki_gazebo_plugins robot_pose_ekf robot_state_publisher xacro yocs_cmd_vel_mux
 #  DEPENDS system_lib
 )
 
@@ -106,19 +106,19 @@ include_directories(
 )
 
 ## Declare a cpp library
-# add_library(chefbot_gazebo
-#   src/${PROJECT_NAME}/chefbot_gazebo.cpp
+# add_library(romnibot_gazebo
+#   src/${PROJECT_NAME}/romnibot_gazebo.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(chefbot_gazebo_node src/chefbot_gazebo_node.cpp)
+# add_executable(romnibot_gazebo_node src/romnibot_gazebo_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(chefbot_gazebo_node chefbot_gazebo_generate_messages_cpp)
+# add_dependencies(romnibot_gazebo_node romnibot_gazebo_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(chefbot_gazebo_node
+# target_link_libraries(romnibot_gazebo_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -137,7 +137,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS chefbot_gazebo chefbot_gazebo_node
+# install(TARGETS romnibot_gazebo romnibot_gazebo_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -162,7 +162,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_chefbot_gazebo.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_romnibot_gazebo.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

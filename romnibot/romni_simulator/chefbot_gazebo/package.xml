@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>chefbot_gazebo</name>
+  <name>romnibot_gazebo</name>
   <version>0.0.0</version>
-  <description>The chefbot_gazebo package</description>
+  <description>The romnibot_gazebo package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/chefbot_gazebo</url> -->
+  <!-- <url type="website">http://wiki.ros.org/romnibot_gazebo</url> -->
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
@@ -40,8 +40,8 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-<!--  <build_depend>chefbot_bringup</build_depend>
-  <build_depend>chefbot_description</build_depend>
+<!--  <build_depend>romnibot_bringup</build_depend>
+  <build_depend>romnibot_description</build_depend>
   <build_depend>depthimage_to_laserscan</build_depend>
   <build_depend>diagnostic_aggregator</build_depend>
   <build_depend>gazebo_ros</build_depend>
@@ -51,8 +51,8 @@
   <build_depend>xacro</build_depend>
   <build_depend>yocs_cmd_vel_mux</build_depend>
 -->
-<!--  <run_depend>chefbot_bringup</run_depend>
-  <run_depend>chefbot_description</run_depend> -->
+<!--  <run_depend>romnibot_bringup</run_depend>
+  <run_depend>romnibot_description</run_depend> -->
   <run_depend>depthimage_to_laserscan</run_depend>
   <run_depend>diagnostic_aggregator</run_depend>
   <run_depend>gazebo_ros</run_depend>

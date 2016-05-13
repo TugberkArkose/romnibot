@@ -134,7 +134,7 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <collision name='base_footprint_collision_chefbot_caster_back_link'>
+        <collision name='base_footprint_collision_romnibot_caster_back_link'>
           <pose>-0.135 0 0.0192 -1.5708 0 0</pose>
           <geometry>
             <cylinder>
@@ -161,7 +161,7 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <collision name='base_footprint_collision_chefbot_caster_front_link'>
+        <collision name='base_footprint_collision_romnibot_caster_front_link'>
           <pose>0.115 0 0.0172 -1.5708 0 0</pose>
           <geometry>
             <cylinder>
@@ -193,7 +193,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/lentin/catkin_ws/src/chefbot/chefbot_description/meshes/base_plate.dae</uri>
+              <uri>/home/lentin/catkin_ws/src/romnibot/romnibot_description/meshes/base_plate.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -374,7 +374,7 @@
         </sensor>
         <kinematic>0</kinematic>
       </link>
-      <link name='chefbot_wheel_left_link'>
+      <link name='romnibot_wheel_left_link'>
         <pose>0 0.14 0.0362 -1.5708 0 0</pose>
         <inertial>
           <pose>0 0 0 0 -0 0</pose>
@@ -388,7 +388,7 @@
             <izz>0.001</izz>
           </inertia>
         </inertial>
-        <collision name='chefbot_wheel_left_link_collision'>
+        <collision name='romnibot_wheel_left_link_collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
@@ -415,12 +415,12 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <visual name='chefbot_wheel_left_link_visual'>
+        <visual name='romnibot_wheel_left_link_visual'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/lentin/catkin_ws/src/chefbot/chefbot_description/meshes/wheel.dae</uri>
+              <uri>/home/lentin/catkin_ws/src/romnibot/romnibot_description/meshes/wheel.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -433,7 +433,7 @@
         <kinematic>0</kinematic>
       </link>
       <joint name='wheel_left_joint' type='revolute'>
-        <child>chefbot_wheel_left_link</child>
+        <child>romnibot_wheel_left_link</child>
         <parent>base_footprint</parent>
         <axis>
           <xyz>0 1 0</xyz>
@@ -444,7 +444,7 @@
           <dynamics/>
         </axis>
       </joint>
-      <link name='chefbot_wheel_right_link'>
+      <link name='romnibot_wheel_right_link'>
         <pose>0 -0.14 0.0362 -1.5708 0 0</pose>
         <inertial>
           <pose>0 0 0 0 -0 0</pose>
@@ -458,7 +458,7 @@
             <izz>0.001</izz>
           </inertia>
         </inertial>
-        <collision name='chefbot_wheel_right_link_collision'>
+        <collision name='romnibot_wheel_right_link_collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
@@ -485,12 +485,12 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-        <visual name='chefbot_wheel_right_link_visual'>
+        <visual name='romnibot_wheel_right_link_visual'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/lentin/catkin_ws/src/chefbot/chefbot_description/meshes/wheel.dae</uri>
+              <uri>/home/lentin/catkin_ws/src/romnibot/romnibot_description/meshes/wheel.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -503,7 +503,7 @@
         <kinematic>0</kinematic>
       </link>
       <joint name='wheel_right_joint' type='revolute'>
-        <child>chefbot_wheel_right_link</child>
+        <child>romnibot_wheel_right_link</child>
         <parent>base_footprint</parent>
         <axis>
           <xyz>0 1 0</xyz>
@@ -897,13 +897,13 @@
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-        <link name='chefbot_wheel_left_link'>
+        <link name='romnibot_wheel_left_link'>
           <pose>-0.000334 0.139978 0.03519 -1.57011 -0.011286 -0.000216</pose>
           <velocity>-7e-06 -1e-05 0.000478 0.000276 -0.000193 -1.1e-05</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-        <link name='chefbot_wheel_right_link'>
+        <link name='romnibot_wheel_right_link'>
           <pose>-0.000393 -0.140022 0.03499 -1.57012 -0.013246 -0.000217</pose>
           <velocity>-9e-06 -9e-06 0.0004 0.000246 -0.000244 -1e-05</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
