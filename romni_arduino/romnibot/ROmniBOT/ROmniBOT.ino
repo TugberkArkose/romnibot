@@ -351,7 +351,7 @@ int Read_Ultrasonic(int ultrasonicPin){
 void Update_Infrared(){
   int distance;
   
-  distance = readInfrared(IR_Pin1)
+  distance = readInfrared(IR_Pin1);
   if(distance > 75)  
       lockOrUnlockDirection(&isNorthLocked, true);      
     else
