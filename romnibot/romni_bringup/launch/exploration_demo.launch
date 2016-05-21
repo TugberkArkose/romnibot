@@ -1,9 +1,13 @@
 <launch>
 
   <!--- Run gmapping -->
-  <include file="$(find romni_bringup)/launch/gmapping_demo.launch" />
+  <include file="$(find romni_bringup)/launch/gmapping.launch" />
+
+  <!--- Run Move Base -->
+  <include file="$(find romni_bringup)/launch/move_base.launch" />
 
   <!-- Run Frontier Exploration -->
   <include file="$(find romni_bringup)/launch/exploration.launch" />
 
 </launch>
+
