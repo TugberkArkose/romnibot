@@ -41,6 +41,8 @@
       lasamplerange: 0.005
       lasamplestep: 0.005
 
+      minimumScore: 10000
+      
     </rosparam>
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
